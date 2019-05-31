@@ -34,22 +34,5 @@ public class Root {
 		this.rates = rates;
 	}
 
-	public Map<String, Double> extractCountryVatMap() {
-		Map<String, Double> countryVatMap = new HashMap<>();
-
-		rates.forEach(item -> {
-			if (item.getName() != null) {
-				if (item.getPeriods() != null) {
-					if (item.getPeriods().get(0).getRates() != null) {
-						if (item.getPeriods().get(0).getRates().getStandard() != null) {
-							String country = item.getName();
-							double vat = Double.parseDouble((item.getPeriods().get(0).getRates().getStandard()));
-							countryVatMap.put(country, vat);
-						}
-					}
-				}
-			}
-		});
-		return countryVatMap;
-	}
+	
 }
