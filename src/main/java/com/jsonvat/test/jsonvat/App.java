@@ -5,9 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -15,7 +13,6 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsonvat.test.jsonvat.model.Root;
-import com.jsonvat.test.jsonvat.order.NComparableIfc;
 import com.jsonvat.test.jsonvat.order.NCompare;
 import com.jsonvat.test.jsonvat.print.Printer;
 
@@ -42,24 +39,18 @@ public class App {
 		}
 
 		try {
-			Utils.getInstance().setPrinter(new Printer());
-			Root rootNode = mapper.readValue(jsonInput, Root.class);			
-			
+			Utils.getInstance().setPrintableIfc(new Printer());
+			Utils.getInstance().setNComparableIfc(new NCompare());
+
+			Root rootNode = mapper.readValue(jsonInput, Root.class);
+
 			Map<String, Double> countryVatMap = Utils.getInstance().extractCountryVatMap(rootNode);
-			
-			NComparableIfc nComparableIfc = new NCompare();
-			List<Entry<String, Double>> en = nComparableIfc.find(countryVatMap, 3, OrderBy.DESC);
-			System.out.println("Highest VATs [en]");
-			Utils.getInstance().print(en);
-			
-			List<Entry<String, Double>> entries = Utils.getInstance().find(countryVatMap, 3, OrderBy.DESC);
+
 			System.out.println("Highest VATs");
-			Utils.getInstance().print(entries);
-			
-			entries = Utils.getInstance().find(countryVatMap, 3, OrderBy.ASC);
+			Utils.getInstance().print(Utils.getInstance().find(countryVatMap, 3, OrderBy.DESC));
+
 			System.out.println("Lowest VATs");
-			Utils.getInstance().print(entries);
-			
+			Utils.getInstance().print(Utils.getInstance().find(countryVatMap, 3, OrderBy.ASC));
 
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
