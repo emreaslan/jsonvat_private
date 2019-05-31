@@ -15,6 +15,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsonvat.test.jsonvat.model.Root;
+import com.jsonvat.test.jsonvat.order.NComparableIfc;
+import com.jsonvat.test.jsonvat.order.NCompare;
 import com.jsonvat.test.jsonvat.print.Printer;
 
 /**
@@ -44,11 +46,18 @@ public class App {
 			Root rootNode = mapper.readValue(jsonInput, Root.class);			
 			
 			Map<String, Double> countryVatMap = Utils.getInstance().extractCountryVatMap(rootNode);
-
+			
+			NComparableIfc nComparableIfc = new NCompare();
+			List<Entry<String, Double>> en = nComparableIfc.find(countryVatMap, 3, OrderBy.DESC);
+			System.out.println("Highest VATs [en]");
+			Utils.getInstance().print(en);
+			
 			List<Entry<String, Double>> entries = Utils.getInstance().find(countryVatMap, 3, OrderBy.DESC);
+			System.out.println("Highest VATs");
 			Utils.getInstance().print(entries);
 			
 			entries = Utils.getInstance().find(countryVatMap, 3, OrderBy.ASC);
+			System.out.println("Lowest VATs");
 			Utils.getInstance().print(entries);
 			
 
