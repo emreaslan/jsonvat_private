@@ -13,19 +13,19 @@ import com.jsonvat.exam.parser.vatparser.CountryVatParserFactory;
 import com.jsonvat.exam.print.Printer;
 
 /**
- * JSon Parser Application
+ * JSon Parser Application by emreaslan (prepared for an interview) 31/05/2019
  *
  */
 public class App {
 	public static void main(String[] args) {
-		int n = 1;
+		int n;
 		URL url = App.class.getResource("data.json");
 		DataParser dataParser = new DataParser(url);
 		Root rootNode = dataParser.parseRoot();
 		if (rootNode != null) {
 			Utils.getInstance().setPrintableIfc(new Printer());
 			Utils.getInstance().setNComparableIfc(new NCompare());
-			Utils.getInstance().setParsableCountryVatIfc(CountryVatParserFactory.getInstance().getVatParser(VatType.REDUCED));
+			Utils.getInstance().setParsableCountryVatIfc(CountryVatParserFactory.getInstance().getVatParser(VatType.STANDARD));
 			Map<String, Double> countryVatMap = Utils.getInstance().parse(rootNode);
 			Scanner in = new Scanner(System.in);
 			try {
