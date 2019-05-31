@@ -4,10 +4,12 @@ import java.net.URL;
 import java.util.Map;
 import java.util.Scanner;
 
+import com.jsonvat.exam.datatypes.OrderByType;
+import com.jsonvat.exam.datatypes.VatType;
 import com.jsonvat.exam.model.Root;
 import com.jsonvat.exam.order.NCompare;
-import com.jsonvat.exam.parser.CountryVatParser;
 import com.jsonvat.exam.parser.DataParser;
+import com.jsonvat.exam.parser.vatparser.CountryVatParserFactory;
 import com.jsonvat.exam.print.Printer;
 
 /**
@@ -23,7 +25,7 @@ public class App {
 		if (rootNode != null) {
 			Utils.getInstance().setPrintableIfc(new Printer());
 			Utils.getInstance().setNComparableIfc(new NCompare());
-			Utils.getInstance().setParsableCountryVatIfc(new CountryVatParser());
+			Utils.getInstance().setParsableCountryVatIfc(CountryVatParserFactory.getInstance().getVatParser(VatType.REDUCED));
 			Map<String, Double> countryVatMap = Utils.getInstance().parse(rootNode);
 			Scanner in = new Scanner(System.in);
 			try {
@@ -32,13 +34,13 @@ public class App {
 					n = in.nextInt();
 					if (n > 0 && n <= countryVatMap.size()) {
 						System.out.println("Highest VATs");
-						Utils.getInstance().print(Utils.getInstance().find(countryVatMap, n, OrderBy.DESC));
+						Utils.getInstance().print(Utils.getInstance().find(countryVatMap, n, OrderByType.DESC));
 						System.out.println();
 						System.out.println("Lowest VATs");
-						Utils.getInstance().print(Utils.getInstance().find(countryVatMap, n, OrderBy.ASC));
+						Utils.getInstance().print(Utils.getInstance().find(countryVatMap, n, OrderByType.ASC));
 						System.out.println();
 					} else {
-						System.out.println("n can not be greater than size of countries with standart vat");
+						System.out.println("Closing the program");
 					}
 				} while (n > 0);
 			} catch (Exception e) {

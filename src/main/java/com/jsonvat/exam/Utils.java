@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.jsonvat.exam.datatypes.OrderByType;
 import com.jsonvat.exam.model.Root;
 import com.jsonvat.exam.order.NComparableIfc;
 import com.jsonvat.exam.parser.ParsableCountryVatIfc;
@@ -42,7 +43,7 @@ public class Utils implements PrintableIfc, NComparableIfc, ParsableCountryVatIf
 	}
 
 	@Override
-	public <K, V extends Comparable<? super V>> List<Entry<K, V>> find(Map<K, V> map, int n, OrderBy orderBy) {
+	public <K, V extends Comparable<? super V>> List<Entry<K, V>> find(Map<K, V> map, int n, OrderByType orderBy) {
 		if (this.nComparableIfc != null) {
 			return this.nComparableIfc.find(map, n, orderBy);
 		}
