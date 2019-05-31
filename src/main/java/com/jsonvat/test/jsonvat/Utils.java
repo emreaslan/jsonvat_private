@@ -1,22 +1,19 @@
 package com.jsonvat.test.jsonvat;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.jsonvat.test.jsonvat.model.Period;
 import com.jsonvat.test.jsonvat.model.Root;
 import com.jsonvat.test.jsonvat.order.NComparableIfc;
+import com.jsonvat.test.jsonvat.parser.ParsableCountryVatIfc;
 import com.jsonvat.test.jsonvat.print.PrintableIfc;
 
-public class Utils implements PrintableIfc, NComparableIfc {
+public class Utils implements PrintableIfc, NComparableIfc, ParsableCountryVatIfc {
 	private static final Utils instance = new Utils();
 	private PrintableIfc printableIfc;
 	private NComparableIfc nComparableIfc;
+	private ParsableCountryVatIfc parsableCountryVatIfc;
 
 	private Utils() {
 	}
@@ -33,52 +30,10 @@ public class Utils implements PrintableIfc, NComparableIfc {
 		this.nComparableIfc = nComparableIfc;
 	}
 
-	public Map<String, Double> extractCountryVatMap(Root rootNode) {
-		Map<String, Double> countryVatMap = new HashMap<>();
-
-		rootNode.getRates().forEach(item -> {
-			if (item.getName() != null) {
-				if (item.getPeriods() != null) {
-					Double currentVat = extractCurrentVat(item.getPeriods());
-					if (currentVat != null) {
-						countryVatMap.put(item.getName(), currentVat);
-					}
-				}
-			}
-		});
-		return countryVatMap;
+	public void setParsableCountryVatIfc(ParsableCountryVatIfc parsableCountryVatIfc) {
+		this.parsableCountryVatIfc = parsableCountryVatIfc;
 	}
-
-	private Double extractCurrentVat(List<Period> periods) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-		LocalDate referenceDate = null;
-		Double referenceVat = null;
-		
-		for(Period period : periods) {
-			boolean isReferenceUpdated = false;
-			if (period.getRates() != null) {
-				
-				LocalDate localDate = LocalDate.from(dtf.parse(period.getEffective_from()));
-				if (localDate == null) {
-					isReferenceUpdated = false;
-				}
-				else if (referenceDate == null) {
-					referenceDate = localDate;
-					isReferenceUpdated = true;
-				}					
-				else if(referenceDate.isBefore(localDate)){					
-					referenceDate = localDate;
-					isReferenceUpdated = true;
-				}
-				
-				if (period.getRates().getStandard() != null && isReferenceUpdated) {
-					referenceVat = Double.parseDouble(period.getRates().getStandard());
-				}
-			}
-		}
-		return referenceVat;
-	}
-
+	
 	@Override
 	public <K, V extends Comparable<? super V>> void print(List<Entry<K, V>> entries) {
 		if (this.printableIfc != null) {
@@ -93,5 +48,13 @@ public class Utils implements PrintableIfc, NComparableIfc {
 		}
 		return null;
 	}
+
+	@Override
+	public Map<String, Double> parse(Root rootNode) {
+		if (this.parsableCountryVatIfc != null) {
+			return this.parsableCountryVatIfc.parse(rootNode);
+		}
+		return null;
+	}	
 
 }
