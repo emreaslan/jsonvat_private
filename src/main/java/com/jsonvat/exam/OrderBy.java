@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat;
+package com.jsonvat.exam;
 
 public enum OrderBy {
 	DESC, ASC

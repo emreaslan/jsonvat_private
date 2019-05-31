@@ -1,19 +1,19 @@
-package com.jsonvat.test.jsonvat;
+package com.jsonvat.exam;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.jsonvat.test.jsonvat.model.Root;
-import com.jsonvat.test.jsonvat.order.NComparableIfc;
-import com.jsonvat.test.jsonvat.parser.ParsableCountryVatIfc;
-import com.jsonvat.test.jsonvat.print.PrintableIfc;
+import com.jsonvat.exam.model.Root;
+import com.jsonvat.exam.order.NComparableIfc;
+import com.jsonvat.exam.parser.ParsableCountryVatIfc;
+import com.jsonvat.exam.print.PrintableIfc;
 
 public class Utils implements PrintableIfc, NComparableIfc, ParsableCountryVatIfc {
 	private static final Utils instance = new Utils();
 	private PrintableIfc printableIfc;
 	private NComparableIfc nComparableIfc;
-	private ParsableCountryVatIfc parsableCountryVatIfc;
+	private ParsableCountryVatIfc parsableCountryVatIfc;	
 
 	private Utils() {
 	}

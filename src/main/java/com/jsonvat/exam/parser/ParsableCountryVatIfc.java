@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.parser;
+package com.jsonvat.exam.parser;
 
 public interface ParsableCountryVatIfc extends ParsableIfc<String, Double>{
 

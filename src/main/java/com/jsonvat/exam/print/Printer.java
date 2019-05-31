@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.print;
+package com.jsonvat.exam.print;
 
 import java.util.List;
 import java.util.Map.Entry;

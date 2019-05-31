@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.parser;
+package com.jsonvat.exam.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.jsonvat.test.jsonvat.model.Period;
-import com.jsonvat.test.jsonvat.model.Root;
+import com.jsonvat.exam.model.Period;
+import com.jsonvat.exam.model.Root;
 
 public class CountryVatParser implements ParsableCountryVatIfc{
 

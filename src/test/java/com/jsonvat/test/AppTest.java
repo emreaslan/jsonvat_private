@@ -1,4 +1,4 @@
-package com.jsonvat.test.json_vat;
+package com.jsonvat.test;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

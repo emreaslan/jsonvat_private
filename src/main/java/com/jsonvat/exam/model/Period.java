@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.model;
+package com.jsonvat.exam.model;
 
 public class Period {
 	private String effective_from;

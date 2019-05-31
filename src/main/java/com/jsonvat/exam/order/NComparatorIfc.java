@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.order;
+package com.jsonvat.exam.order;
 
 import java.util.Comparator;
 import java.util.Map.Entry;

@@ -1,4 +1,4 @@
-package com.jsonvat.test.jsonvat.model;
+package com.jsonvat.exam.model;
 
 import java.util.ArrayList;
 import java.util.List;

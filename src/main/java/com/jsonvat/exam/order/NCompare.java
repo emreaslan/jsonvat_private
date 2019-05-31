@@ -1,10 +1,10 @@
-package com.jsonvat.test.jsonvat.order;
+package com.jsonvat.exam.order;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.jsonvat.test.jsonvat.OrderBy;
+import com.jsonvat.exam.OrderBy;
 
 public class NCompare extends NCompareAbs implements NComparableIfc {
 
