@@ -7,7 +7,7 @@ git clone git@github.com:emreaslan/jsonvat_private.git
 2. Import as Existing Maven Project
 3. Run App
 
-## A Scenario for Standart VAT
+## A Scenario for Standard VAT
 ```
 Please enter n (1-28 to process query, other values to exit):3
 Highest VATs
